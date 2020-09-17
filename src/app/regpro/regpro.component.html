@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Login or Register</title>
+    <script>
+        var getUrlParameter = function getUrlParameter(sParam) {
+            var sPageURL = window.location.search.substring(1),
+                sURLVariables = sPageURL.split('&'),
+                sParameterName,
+                i;
+            for (i = 0; i < sURLVariables.length; i++) {
+                sParameterName = sURLVariables[i].split('=');
+                if (sParameterName[0] === sParam) {
+                    return sParameterName[1] === undefined ? true :
+                        decodeURIComponent(sParameterName[1]);
+                }
+            }
+        };
+        if (getUrlParameter('register') == 'true') {
+            document.getElementById('flipcard-inner').style.transform = 'rotateY(180deg)';
+        }
+
+    </script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script type="text/javascript">
+        var app = angular.module('ngpatternApp', []);
+        app.controller('ngpatternCtrl', function ($scope) {
+            $scope.sendForm = function () {
+                $scope.msg = "Form Validated";
+            };
+        });
+    </script>
+    <style>
+        .body {
+            background-image: url('assets/images/bg1.jpg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+    </style>
+</head>
+
+<body class="body">
+
+    <div class="wrap">
+        <input type="checkbox" id="form_switch" style="display: none;">
+        <div class="flipcard">
+            <div class="flipcard-inner">
+                <div class="flipcard-front">
+                    <div ng-app="ngpatternApp" ng-controller="ngpatternCtrl">
+                        <form class="login-form" action="" #registerForm="ngForm" (ngSubmit)="regSubmitcust()"
+                            novalidate>
+                            <div class="form-header">
+                                <h3>Sign up </h3>
+
+                            </div>
+                            <!--Email Input-->
+                            <div class="form-group">
+                                <input type="text" class="form-input" name="name" placeholder="User name"
+                                    [(ngModel)]="user.custName" required ngModel #name="ngModel">
+                                <div *ngIf="name.touched && name.errors?.required" class="alert alert-danger">please
+                                    enter name</div>
+                            </div>
+                            <!--Password Input
+                    <div class="form-group">
+                       <input type="email" class="form-input" name="email" placeholder="email" [(ngModel)] = "userr.email" required  ngModel #email="ngModel">
+                       <div *ngIf="email.touched && email.errors?.required" class="alert alert-danger">please enter email</div>
+                    </div>-->
+                            <!--Password Input-->
+                            <div class="form-group">
+                                <div class="validate-input" data-validate="Valid email is required: ex@abc.xyz">
+                                    <input type="email" name="email" class="placeholder form-input" ngModel
+                                        #email="ngModel" required maxlength=50 minlength=6 placeholder="Email"
+                                        [(ngModel)]="user.email">
+                                    <div *ngIf="registerForm.touched && email.errors?.required"
+                                        class="alert alert-danger">please enter email</div>
+                                    <div *ngIf="registerForm.touched && email.errors?.minlength"
+                                        class="alert alert-danger">please enter proper email</div><br />
+                                </div>
+                                <div class="form-group row" style = "margin-top: 13px;">
+                                    <input type="radio" id="male" name="gender" value="male" [(ngModel)]="user.gender" style = "margin-left: 10px;margin-top: 5px;margin-right: 10px;"
+                                        ngModel #gender="ngModel">
+                                    <label for="male">Male</label><br>
+                                    <input type="radio" id="female" name="gender" value="female" style = "margin-left: 10px;margin-top: 5px;margin-right: 10px;"
+                                        [(ngModel)]="user.gender" ngModel #gender="ngModel">
+                                    <label for="female">Female</label><br>
+                                    <input type="radio" id="other" name="gender" value="other" [(ngModel)]="user.gender" style = "margin-left: 10px;margin-top: 5px;margin-right: 10px;"
+                                        ngModel #gender="ngModel">
+                                    <label for="other">Other</label>
+                                    <div *ngIf="mobile.touched && mobile.errors?.required" class="alert alert-danger">
+                                        please select gender</div>
+                                </div>
+                                <input style="margin-top: 3px;" class="form-input" type="text" placeholder="Mobile"
+                                    ngModel #mobile="ngModel" ng-pattern="/^[0-9]{9}$/" name="mobile"
+                                    [(ngModel)]='user.mobile' minlength=10 maxlength=10 required>
+                                <div *ngIf="mobile.touched && mobile.errors?.required" class="alert alert-danger">please
+                                    enter mobile number</div>
+                                <div *ngIf="mobile.touched && mobile.errors?.minlength" class="alert alert-danger">
+                                    Please enter 10 digit number</div>
+                                <div *ngIf="mobile.touched && mobile.errors?.maxlength" class="alert alert-danger">Can't
+                                    exceed 10 digits </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-input" name="address" placeholder="Address"
+                                    [(ngModel)]="user.address" required ngModel #address="ngModel">
+                                <div *ngIf="address.touched && address.errors?.required" class="alert alert-danger">
+                                    please enter address</div>
+                            </div>
+                            <div class="form-group">
+                                <select class="form-input" name="city" [(ngModel)]="user.city" required
+                                    aria-labelledby="City" ngModel #city="ngModel">
+                                    <option value="" disabled selected hidden>
+                                        <p style="color: lightgrey;">City</p>
+                                    </option>
+                                    <option value="Hyderabad" selected>Hyderabad</option>
+                                    <option value="Vijayawada" selected>Vijayawada</option>
+                                    <option value="Banglore" selected>Banglore</option>
+                                </select>
+                                <div *ngIf="city.touched && city.errors?.required" class="alert alert-danger">please
+                                    select city</div>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-input" type="text" placeholder="Pincode" ngModel #pincode="ngModel"
+                                    name="pincode" [(ngModel)]='user.pincode' minlength=6 maxlength=6 required>
+                                <div *ngIf="pincode.touched && pincode.errors?.required" class="alert alert-danger">
+                                    please enter Pincode</div>
+                                <div *ngIf="pincode.touched && pincode.errors?.minlength" class="alert alert-danger">
+                                    Please enter 6 digits</div>
+                                <div *ngIf="pincode.touched && pincode.errors?.maxlength" class="alert alert-danger">
+                                    Can't exceed 6 digits</div>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-input" name="password" placeholder="Password"
+                                    [(ngModel)]="user.password" required ngModel #password="ngModel">
+                                <div *ngIf="password.touched && password.errors?.required" class="alert alert-danger">
+                                    please enter password</div>
+                            </div>
+                            <!--Login Button-->
+                            <div class="form-group">
+                                <button class="form-button form-button-register" [disabled]="!registerForm.valid">Sign
+                                    up</button>
+                            </div>
+                            <div class="form-footer"><label class="label-highlight" for="form_switch"> Sign up as
+                                    professional</label>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+                <!--	<div class="flipcard-back">
+        <form class="login-form" action="">
+            <div class="form-header">
+                <h3>Sign up as customer</h3>
+            
+            </div>
+           
+            <div class="form-group validate-input" data-validate="Valid email is required: ex@abc.xyz">
+            <input type="text" class="form-input" name="email" placeholder="Email" [(ngModel)]="user.email">
+            </div>
+      
+            <div class="form-group validate-input" data-validate="Password is required">
+                <input type="password" class="form-input" name="password" placeholder="Password" [(ngModel)]="user.password">
+            </div>
+ 
+            <div class="form-group">
+              <button class="form-button" type="submit" (click) = "loginSubmit()" >
+                Login</button>
+            </div>
+            <div class="form-footer">
+             Don't have an account? <label class="label-highlight" for="form_switch"> Sign Up </label>
+            </div>
+    </form>
+    </div>-->
+                <div class="flipcard-back">
+                    <form class="login-form" action="" name="regForm">
+                        <div class="form-header">
+                            <h3>Sign up as professional</h3>
+
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-input" name="name" placeholder="Service Name"
+                                [(ngModel)]="userr.serviceName" required ngModel #name="ngModel">
+                            <div *ngIf="name.touched && name.errors?.required" class="alert alert-danger">please enter
+                                name</div>
+                        </div>
+                        <div class="form-group">
+                            <select class="form-input" name="category" [(ngModel)]="userr.category" required
+                                aria-labelledby="Category" ngModel #category="ngModel">
+                                <option value="" disabled selected hidden>
+                                    <p style="color: lightgrey;">Category</p>
+                                </option>
+                                <option value="salon" selected>Salon & Spa</option>
+                                <option value="carpentry">Carpentry</option>
+                                <option value="car wash">Car wash</option>
+                                <option value="electrical">Electricians</option>
+                                <option value="plumber">Plumbers</option>
+                                <option value="disinfection">DisInfection</option>
+                            </select>
+
+                            <div *ngIf="category.touched && category.errors?.required" class="alert alert-danger">please
+                                choose category</div>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="email" class="form-input" name="email" required
+                                ng-pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$" placeholder="Email" [(ngModel)]="userr.email"
+                                required ngModel #email="ngModel">
+                            <div *ngIf="email.touched && email.errors?.required" class="alert alert-danger">please enter
+                                email</div>
+                            <!--div ng-show="regForm.email.$dirty&&regForm.email.$error.pattern" class="alert alert-danger">please enter proper email</div>
+                -->
+                        </div>
+                        <div class="form-group">
+
+                            <input class="form-input" type="text" placeholder="Mobile" ngModel #mobile="ngModel"
+                                name="mobile" [(ngModel)]='userr.mobile' minlength=10 maxlength=10 required>
+                            <div *ngIf="mobile.touched && mobile.errors?.required" class="alert alert-danger">please
+                                enter mobile number
+                            </div>
+                            <div *ngIf="mobile.touched && mobile.errors?.minlength" class="alert alert-danger">Please
+                                enter atleast 10 digits
+                            </div>
+                            <div *ngIf="mobile.touched && mobile.errors?.maxlength" class="alert alert-danger">Can't
+                                exceed 10 digits
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-input" name="address" placeholder="Address"
+                                [(ngModel)]="userr.address" required ngModel #address="ngModel">
+                            <div *ngIf="address.touched && address.errors?.required" class="alert alert-danger">please
+                                enter address</div>
+                        </div>
+                        <div class="form-group">
+                            <select class="form-input" name="city" [(ngModel)]="userr.city" required
+                                aria-labelledby="City" ngModel #city="ngModel">
+                                <option value="" disabled selected hidden>
+                                    <p style="color: lightgrey;">City</p>
+                                </option>
+                                <option value="Hyderabad" selected>Hyderabad</option>
+                                <option value="Vijayawada" selected>Vijayawada</option>
+                                <option value="Banglore" selected>Banglore</option>
+                            </select>
+                            <div *ngIf="city.touched && city.errors?.required" class="alert alert-danger">please select
+                                city</div>
+                        </div>
+                            <div class="form-group">
+                                <input type="password" class="form-input" name="password" placeholder="Password"
+                                    [(ngModel)]="userr.password" required ngModel #password="ngModel">
+                                <div *ngIf="password.touched && password.errors?.required" class="alert alert-danger">
+                                    please enter password</div>
+                            </div>
+                            <!--Login Button-->
+                            <div class="form-group form-footer">
+                                <button class="form-button form-button-register " type="submit"
+                                    (click)="regSubmit()">Sign up</button>
+                            </div>
+                            <div class="form-footer"><label class="label-highlight" for="form_switch"> Sign up ascustomer</label>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
+import { ServiceService } from '../service.service';
+
 @Component({
   selector: 'app-trial',
   templateUrl: './trial.component.html',
@@ -7,7 +10,7 @@ import { NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
 })
 export class TrialComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router,private service : ServiceService) { }
 
   ngOnInit(): void {
   }
@@ -17,5 +20,9 @@ export class TrialComponent implements OnInit {
     console.log(NgbSlideEventSource.INDICATOR);
     console.log(NgbSlideEventSource.ARROW_LEFT);
     console.log(NgbSlideEventSource.ARROW_RIGHT);
+}
+choose(cat : any):any{
+  this.service.cat = cat;
+  this.router.navigate(['services']);
 }
 }
