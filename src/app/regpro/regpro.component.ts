@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ServiceService } from '../service.service'
 import { NotificationService } from '../notification.service'
-
 @Component({
   selector: 'app-regpro',
   templateUrl: './regpro.component.html',
@@ -13,13 +12,23 @@ export class RegproComponent implements OnInit {
   user: any;
   userr : any;
   title = 'toaster-not';
+  min  = 1000;
+  max = 9999;
+  otp : any;
+  verifyOtp : any;
   constructor(private router: Router , private service : ServiceService , private notifyService : NotificationService) {
     this.user = { custId: "", custName: "", email: "", mobile: "", password: "", address: "", pincode: "",gender : "",city : "" };
     this.userr = {serviceId : "" , serviceName : "" , category : "" , coupons : " " , 
-    rating : "0" , reviews : " " ,  email : "" , mobile : "" , password : "" , address : "",imageName : "" , city:""};
+    rating : "0" , reviews : " " ,  email : "" , mobile : "" , password : "" , address : "",imageName : null , city:""};
 
    }
-
+   validateEmail(email) {
+    if (email == "[^ @]*@[^ @]*") {
+    return true;
+    }
+    else{
+      return false;}
+    }
   ngOnInit(): void {
   }
  /* async loginSubmit() {
@@ -40,9 +49,12 @@ export class RegproComponent implements OnInit {
 
   async regSubmit(){
     await this.service.registerSer(this.userr).then((result:any)=>{console.log(result);
-      if(result === "Success")
+      if(result === "Success"){
   this.notifyService.showSuccess("" , "Registered successfully :)");
-  else if(result === "Exists"){
+  this.router.navigate(['flip']);
+
+      }
+      else if(result === "Exists"){
     this.notifyService.showError("" , "Mobile Number already exists.");
   }
   else{
@@ -52,17 +64,20 @@ export class RegproComponent implements OnInit {
     console.log(this.userr);
     this.userr = {serviceId : "" , serviceName : "" , category : "" , coupons : " " , 
     rating : "0" , reviews : " " ,  email : "" , mobile : "" , password : "" , address : "",imageName : "" , city:""};
-    this.router.navigate(['flip']);
 
   }
   registerSubmit(registrationForm : any) : void{
     
   }
   async regSubmitcust() {
+    if(this.verifyOtp == this.otp){
     await this.service.registerCust(this.user).then((result: any) => { console.log(result);
     
-      if(result === "Success")
+      if(result === "Success"){
+        this.user = { custId: "", custName: "", email: "", mobile: "", password: "", address: "", pincode: "",gender : "",city : "" };
       this.notifyService.showSuccess("" , "Registered successfully :)");
+      this.router.navigate(['flip']);
+      }
       else if(result === "Exists"){
         this.notifyService.showError("" , "Mobile Number already exists.");
       }
@@ -71,8 +86,11 @@ export class RegproComponent implements OnInit {
       }
 });
     console.log(this.user);
-    this.user = { custId: "", custName: "", email: "", mobile: "", password: "", address: "", pincode: "",gender : "",city : "" };
   }
+  else{
+    this.notifyService.showError("" , "Wrong OTP!");
+  }
+}
   
   
   showToasterSuccess(){
@@ -93,4 +111,19 @@ export class RegproComponent implements OnInit {
   setCat(s : any):any{
     this.userr.category = s;
   }
+
+  //otp
+  getRandomIntInclusive() {
+
+    console.log("fun");
+    if(this.user.mobile.length != 0){
+      console.log("if");
+    this.min = Math.ceil(this.min);
+    this.max = Math.floor(this.max);
+    this.otp =  Math.floor(Math.random() * (this.max - this.min + 1) + this.min); 
+    this.service.sendOtp(this.otp,this.user.mobile).subscribe((result:any)=>{console.log(result)});
+   }
+  }
+
 }
+

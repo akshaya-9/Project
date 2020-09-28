@@ -37,6 +37,8 @@
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-size: cover;
+            overflow-y: hidden;
+            height: 800px;
         }
     </style>
 </head>
@@ -49,10 +51,10 @@
             <div class="flipcard-inner">
                 <div class="flipcard-front">
                     <div ng-app="ngpatternApp" ng-controller="ngpatternCtrl">
-                        <form class="login-form" action="" #registerForm="ngForm" (ngSubmit)="regSubmitcust()"
+                        <form class="login-form" action="" #registerForm="ngForm" (ngSubmit)="regSubmitcust()" style ="height: 683px;"
                             novalidate>
                             <div class="form-header">
-                                <h3>Sign up </h3>
+                                <h3 style="margin-top: -16px;">Sign up </h3>
 
                             </div>
                             <!--Email Input-->
@@ -71,36 +73,45 @@
                             <div class="form-group">
                                 <div class="validate-input" data-validate="Valid email is required: ex@abc.xyz">
                                     <input type="email" name="email" class="placeholder form-input" ngModel
-                                        #email="ngModel" required maxlength=50 minlength=6 placeholder="Email"
+                                        #email="ngModel" required maxlength=50 minlength=6 placeholder="Email" pattern="^[_\.0-9a-z-]+@([0-9a-z][0-9a-z-]+)+((\.)[a-z]{2,})+$"
                                         [(ngModel)]="user.email">
-                                    <div *ngIf="registerForm.touched && email.errors?.required"
+                                    <div *ngIf="email.touched && email.errors?.required"
                                         class="alert alert-danger">please enter email</div>
-                                    <div *ngIf="registerForm.touched && email.errors?.minlength"
-                                        class="alert alert-danger">please enter proper email</div><br />
+                                        <div *ngIf="email.errors">
+                                            <div [hidden]="!email.errors.pattern" class="alert alert-danger">
+                                                   Enter Valid Email.
+                                            </div>
+                                         </div>
                                 </div>
-                                <div class="form-group row" style = "margin-top: 13px;">
-                                    <input type="radio" id="male" name="gender" value="male" [(ngModel)]="user.gender" style = "margin-left: 10px;margin-top: 5px;margin-right: 10px;"
-                                        ngModel #gender="ngModel">
-                                    <label for="male">Male</label><br>
-                                    <input type="radio" id="female" name="gender" value="female" style = "margin-left: 10px;margin-top: 5px;margin-right: 10px;"
-                                        [(ngModel)]="user.gender" ngModel #gender="ngModel">
-                                    <label for="female">Female</label><br>
-                                    <input type="radio" id="other" name="gender" value="other" [(ngModel)]="user.gender" style = "margin-left: 10px;margin-top: 5px;margin-right: 10px;"
-                                        ngModel #gender="ngModel">
-                                    <label for="other">Other</label>
-                                    <div *ngIf="mobile.touched && mobile.errors?.required" class="alert alert-danger">
-                                        please select gender</div>
+                                <div class="form-group">
+                                    <select class="form-input" name="gender" [(ngModel)]="user.gender" style = "margin-top: 2px;margin-bottom: -20px;"
+                                    required  aria-labelledby="Gender" ngModel #gender="ngModel">
+                                        <option value="" disabled selected hidden>
+                                            <p style="color: lightgrey;">Gender</p>
+                                        </option>
+                                        <option value="female" selected>Female</option>
+                                        <option value="male" selected>Male</option>
+                                    </select>
+                                    <div *ngIf="gender.touched && gender.errors?.required" class="alert alert-danger">please
+                                        select Gender</div>
                                 </div>
-                                <input style="margin-top: 3px;" class="form-input" type="text" placeholder="Mobile"
-                                    ngModel #mobile="ngModel" ng-pattern="/^[0-9]{9}$/" name="mobile"
-                                    [(ngModel)]='user.mobile' minlength=10 maxlength=10 required>
+                                <input style="margin-top: 3px;" class="form-input" type="number" placeholder="Mobile"
+                                    ngModel #mobile="ngModel" pattern="[6789][0-9]{9}"  name="mobile"
+                                    [(ngModel)]='user.mobile'  required>
                                 <div *ngIf="mobile.touched && mobile.errors?.required" class="alert alert-danger">please
-                                    enter mobile number</div>
-                                <div *ngIf="mobile.touched && mobile.errors?.minlength" class="alert alert-danger">
-                                    Please enter 10 digit number</div>
-                                <div *ngIf="mobile.touched && mobile.errors?.maxlength" class="alert alert-danger">Can't
-                                    exceed 10 digits </div>
-                            </div>
+                                    enter mobile number</div> <label style = "margin-left: 15pc;cursor: pointer;" (click) = "getRandomIntInclusive()"> verify</label> 
+
+                                    <div *ngIf="mobile.errors">
+                                        <div [hidden]="!mobile.errors.pattern" class="alert alert-danger">
+                                               Enter 10 digit Number.
+                                        </div>
+                                     </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-input" name="otp" placeholder="OTP" 
+                                        [(ngModel)]="verifyOtp" required ngModel #otp="ngModel">
+                                </div>
+                               
                             <div class="form-group">
                                 <input type="text" class="form-input" name="address" placeholder="Address"
                                     [(ngModel)]="user.address" required ngModel #address="ngModel">
@@ -121,14 +132,15 @@
                                     select city</div>
                             </div>
                             <div class="form-group">
-                                <input class="form-input" type="text" placeholder="Pincode" ngModel #pincode="ngModel"
-                                    name="pincode" [(ngModel)]='user.pincode' minlength=6 maxlength=6 required>
+                                <input class="form-input" type="number" placeholder="Pincode" ngModel #pincode="ngModel"
+                                    name="pincode" [(ngModel)]='user.pincode' pattern="[0-9]{6}" required>
                                 <div *ngIf="pincode.touched && pincode.errors?.required" class="alert alert-danger">
                                     please enter Pincode</div>
-                                <div *ngIf="pincode.touched && pincode.errors?.minlength" class="alert alert-danger">
-                                    Please enter 6 digits</div>
-                                <div *ngIf="pincode.touched && pincode.errors?.maxlength" class="alert alert-danger">
-                                    Can't exceed 6 digits</div>
+                                    <div *ngIf="pincode.errors">
+                                        <div [hidden]="!pincode.errors.pattern" class="alert alert-danger">
+                                               Enter Valid Pincode.
+                                        </div>
+                                        </div>
                             </div>
                             <div class="form-group">
                                 <input type="password" class="form-input" name="password" placeholder="Password"
@@ -138,7 +150,7 @@
                             </div>
                             <!--Login Button-->
                             <div class="form-group">
-                                <button class="form-button form-button-register" [disabled]="!registerForm.valid">Sign
+                                <button class="form-button form-button-register"  [disabled]="!registerForm.valid">Sign
                                     up</button>
                             </div>
                             <div class="form-footer"><label class="label-highlight" for="form_switch"> Sign up as
@@ -173,7 +185,7 @@
     </form>
     </div>-->
                 <div class="flipcard-back">
-                    <form class="login-form" action="" name="regForm">
+                    <form class="login-form" action="" name="regForm" style ="height: 683px;">
                         <div class="form-header">
                             <h3>Sign up as professional</h3>
 
@@ -203,27 +215,35 @@
                         </div>
 
                         <div class="form-group">
-                            <input type="email" class="form-input" name="email" required
-                                ng-pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$" placeholder="Email" [(ngModel)]="userr.email"
-                                required ngModel #email="ngModel">
-                            <div *ngIf="email.touched && email.errors?.required" class="alert alert-danger">please enter
+                            <input type="email" class="form-input" name="emails" required
+                            pattern="^[_\.0-9a-z-]+@([0-9a-z][0-9a-z-]+)+((\.)[a-z]{2,})+$" placeholder="Email" [(ngModel)]="userr.email"
+                                required ngModel #emails="ngModel">
+                            <div *ngIf="emails.touched && emails.errors?.required" class="alert alert-danger">please enter
                                 email</div>
+                                <div *ngIf="emails.errors">
+                                    <div [hidden]="!emails.errors.pattern" class="alert alert-danger">
+                                           Enter Valid Email.
+                                    </div>
+                                 </div>
                             <!--div ng-show="regForm.email.$dirty&&regForm.email.$error.pattern" class="alert alert-danger">please enter proper email</div>
                 -->
                         </div>
                         <div class="form-group">
 
-                            <input class="form-input" type="text" placeholder="Mobile" ngModel #mobile="ngModel"
-                                name="mobile" [(ngModel)]='userr.mobile' minlength=10 maxlength=10 required>
-                            <div *ngIf="mobile.touched && mobile.errors?.required" class="alert alert-danger">please
+                            <input class="form-input" type="number" placeholder="Mobile" ngModel #mobiles="ngModel"
+                                name="mobiles" [(ngModel)]='userr.mobile' pattern="[6789][0-9]{9}"  required>
+                            <div *ngIf="mobiles.touched && mobiles.errors?.required" class="alert alert-danger">please
                                 enter mobile number
                             </div>
-                            <div *ngIf="mobile.touched && mobile.errors?.minlength" class="alert alert-danger">Please
-                                enter atleast 10 digits
-                            </div>
-                            <div *ngIf="mobile.touched && mobile.errors?.maxlength" class="alert alert-danger">Can't
-                                exceed 10 digits
-                            </div>
+                            <div *ngIf="mobiles.errors">
+                                <div [hidden]="!mobiles.errors.pattern" class="alert alert-danger">
+                                       Enter Valid mobile.
+                                </div><label style = "margin-left: 15pc;cursor: pointer;" (click) = "getRandomIntInclusive()"> verify</label>
+                             </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-input" name="otp" placeholder="OTP" 
+                                [(ngModel)]="verifyOtp" required ngModel #otp="ngModel">
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-input" name="address" placeholder="Address"
@@ -255,7 +275,7 @@
                                 <button class="form-button form-button-register " type="submit"
                                     (click)="regSubmit()">Sign up</button>
                             </div>
-                            <div class="form-footer"><label class="label-highlight" for="form_switch"> Sign up ascustomer</label>
+                            <div class="form-footer"><label class="label-highlight" for="form_switch"> Sign up as customer</label>
                             </div>
                     </form>
                 </div>

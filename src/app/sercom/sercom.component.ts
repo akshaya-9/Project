@@ -254,6 +254,7 @@ timeBooks = [];
 week : any;
 month : any;
 year : any;
+upload : boolean;
 constructor(public fb: FormBuilder,private router: Router,private service : ServiceService,private location : Location,private guidedTourService: GuidedTourService,private datePipe: DatePipe) {
 this.uploadForm = this.fb.group({
 avatar: [null],
@@ -282,6 +283,8 @@ this.today = this.datePipe.transform(this.today,'yyyy-MM-dd');
 this.week = this.datePipe.transform(this.week,'yyyy-MM-dd');
 this.month = this.datePipe.transform(this.month,'yyyy-MM-dd');
 this.year = this.datePipe.transform(this.year,'yyyy-MM-dd');
+//this.imageURL = "/assets/images/"+this.ser.imageName;
+this.upload = false;
 }
 
 ngOnInit(): void {
@@ -307,12 +310,18 @@ this.imageURL = reader.result as string;
 reader.readAsDataURL(this.fileToUpload)
 }
 
-
 submitIMG(imageForm : any) {
-this.service.PostFile(imageForm,this.fileToUpload).subscribe(data => {console.log('done');
-this.imageURL = '/assets/images/default-png';});
-console.log(this.uploadForm.value);
+  this.service.ser.imageName = this.fileToUpload.name;
+this.service.PostFile(imageForm,this.fileToUpload).subscribe(data => {console.log('done');});
+//this.imageURL = '/assets/images/default-png';
+console.log(this.imageURL);
+console.log(this.imageURL)
+this.upload = true;
+this.router.navigate(['sercom']);
+}
 
+refresh() : any{
+  return this.upload;
 }
 
 //RATINGS AND REVIEWS
@@ -330,11 +339,13 @@ this.updateW = worker;
 addWorker(registrationForm : any){
 //console.log(this.editObject);
 // this.editObject.service.serviceId = this.service1.serId;
+this.addW.rating = 5;
 this.service.registerWor(this.addW).subscribe((result:any)=>{console.log(result)});
 
 console.log(registrationForm.value);
 this.service.getWorkers().subscribe((result: any) => {console.log(result),this.workers = result});
 this.service.getWorkers().subscribe((result: any) => {console.log(result),this.workers = result});
+this.addW = {workerId: '',aarogyasetustatus : 'green',workerName: '',designation: '',temperature : '',mobile : '',service:{serviceId:this.service.serId},gender : ""}
 //this.router.navigate[('home')];
 }
 deleteWor(worker : any) : void{
@@ -355,6 +366,8 @@ console.log(registrationForm.value);
 this.service.getServices().subscribe((result: any) => {console.log(result),this.services = result});
 this.service.getServices().subscribe((result: any) => {console.log(result),this.services = result});
 //this.router.navigate[('home')];
+this.servicea = {id: '',serviceeName : '',price:'',service:{serviceId:this.service.serId}}
+
 }
 deleteSer(employee : any) : void{
 this.service.deleteSers(employee).subscribe((result : any) => {const i = this.services.findIndex((element) => {return element.id === employee.id})
@@ -385,7 +398,7 @@ time():any{
   }
   else if(this.value === "Last one week"){
     this.books.forEach(element => {
-      if(element.date >= this.week){
+      if(element.date >= this.week && element.date <= this.today){
         this.timeBooks.push(element);
         this.i = this.i + 1;
       }
@@ -393,7 +406,7 @@ time():any{
   }
   else if(this.value === "Last one month"){
     this.books.forEach(element => {
-      if(element.date >= this.month){
+      if(element.date >= this.month && element.date <= this.today){
         this.timeBooks.push(element);
         this.i = this.i + 1;
       }
@@ -401,7 +414,7 @@ time():any{
   }
   else if(this.value === "Last one year"){
     this.books.forEach(element => {
-      if(element.date >= this.year){
+      if(element.date >= this.year && element.date <= this.today){
         this.timeBooks.push(element);
         this.i = this.i + 1;
       }
@@ -483,6 +496,15 @@ return true;
 }
 else{
 return false;
+}
+}
+ck():any{
+
+  if(this.ser.imageName === null)
+    return true;
+    else{
+      console.log(this.ser.imageName);
+      return false;
 }
 }
 

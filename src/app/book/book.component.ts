@@ -25,13 +25,14 @@ export class BookComponent implements OnInit {
   finalBook: any;
   bookings : any;
   off : any;
+  dummyBook : any;
   constructor(private router: Router, private service: ServiceService, private datePipe: DatePipe,private location : Location) {
     //  this.serList = [{serId : 1 , serName : "x", price : 300},
     //      {serId : 2 , serName : "y", price : 300},
     //      {serId : 3 , serName : "z", price : 300}];
     this.service.getSers().subscribe((result: any) => { console.log(result), this.serList = result });
     this.bookS = {
-      bookingId: "", appointmentType: "home", category: "", date: "", mobile: "9876543210", price: "", time: "", customer: { custId: this.service.cust.custId }, service: { serviceId: this.service.serviceII }, services: { id: '' }, worker: { workerId: 1 },
+      bookingId: "", appointmentType: "home", category: "", date: "", mobile: "9876543210", price: "", time: "", customer: { custId: this.service.cust.custId }, service: { serviceId: this.service.serviceII }, services: { id: '' }, worker: { workerId: '' },
       rating: "0", status: "not done"
     };
     this.d = null;
@@ -40,13 +41,13 @@ export class BookComponent implements OnInit {
     this.nine = 0;
     this.today = new Date();
     this.nextDate = new Date();
-    //this.today.setDate(this.nextDate.getDate() + 1);    
+    this.today.setDate(this.nextDate.getDate() + 1);    
     this.nextDate.setDate(this.today.getDate() + 1);    
     this.today = this.datePipe.transform(this.today,'yyyy-MM-dd');
     this.nextDate = this.datePipe.transform(this.nextDate,'yyyy-MM-dd');
     this.bookS.time=null;
     this.bookS.services.id=0;
-    this.off = 0.00;
+    this.off = 0;
     //this.services = {id :'',price:'',serviceeName:'',service:{serviceId:this.service.serviceII}};}
   }
   ngOnInit(): void {
@@ -57,7 +58,6 @@ export class BookComponent implements OnInit {
   regSubmit(){
     this.bookS.services.id = Number(this.bookS.services.id);
     this.service.x = Number(this.bookS.services.id);
-    this.bookS.price = this.off;
     this.service.bookSer(this.bookS).subscribe((result: any) => { console.log(result);this.finalBook = result;
     //console.log(this.bookS.worker.workerName,this.bookS.mobile,this.service.cust.mobile,this.bookS.time);
    // console.log("book: " + this.bookS);
@@ -119,7 +119,10 @@ export class BookComponent implements OnInit {
   }
 
   setSer(s:any):any{
-    this.bookS.services = s; 
+    console.log("dsfbhdsbfhds");
+    this.bookS.services = s;
+    console.log(this.bookS.services);
+
   }
 
   check():any{
@@ -133,10 +136,15 @@ export class BookComponent implements OnInit {
   }
 
   discount() : any{
+    console.log("Helooooooooooo");
+    console.log(this.bookS.services);
+    this.off = this.bookS.services.price;
     if(this.bookings.length === 0){
       this.off = this.bookS.services.price-(this.bookS.services.price/10);
+      this.bookS.price = this.off;
       return true;
     }
+    this.bookS.price = this.off;
     return false;
   }
 }

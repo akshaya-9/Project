@@ -37,9 +37,12 @@ import { NewComponent } from './new/new.component';
 import { SercomComponent } from './sercom/sercom.component';
 import { SearchComponent } from './search/search.component';
 import { GuidedTourModule } from 'projects/ngx-guided-tour/src/lib/guided-tour.module';
+import { FilterPipe } from './filter.pipe';
+import { CustreviewComponent } from './custreview/custreview.component';
 
 
 const appRoot:Routes=[{path:'', component: TrialComponent},
+{path:'cust-review',component:CustreviewComponent},
 {path:'flip', component: FlipComponent},
 {path:'trial', component: TrialComponent},
 {path:'salon',component:SalonComponent},
@@ -48,6 +51,8 @@ const appRoot:Routes=[{path:'', component: TrialComponent},
 {path:'service-hp',component:ServiceHPComponent},
 {path:'regpro',component:RegproComponent},
 {path:'services/one-service',component:OneServiceComponent},
+{path:'one-service',component:OneServiceComponent},
+{path:'trial/one-service',component:OneServiceComponent},
 {path:'service-hp/worker-details',component:WorkerDetailsComponent},
 {path:'service-hp/service-details',component:ServiceDetailsComponent},
 {path:'services/one-service/book',component:BookComponent},
@@ -85,6 +90,8 @@ const appRoot:Routes=[{path:'', component: TrialComponent},
     NewComponent,
     SercomComponent,
     SearchComponent,
+    FilterPipe,
+    CustreviewComponent,
   ],
   imports: [
     NgbModule,

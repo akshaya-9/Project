@@ -143,7 +143,7 @@ export class ServiceService {
     return this.httpClient.get('viewss/webapi/myresource/loginCE/' + email).toPromise();
   }
   message(workername:any, workerMob:any,date: any,time : any):any{
-    return this.httpClient.get('viewss/webapi/myresource/message/'+workername+'/'+workerMob+'/'+this.custMob+'/'+date+'/'+time);
+    return this.httpClient.get('viewss/webapi/myresource/message/'+workername+'/'+workerMob+'/'+this.custMob+'/'+date+'/'+time+'/'+this.cust.address + '/' + this.uname);
   }
   updateCust(customer : any) : any{
     return this.httpClient.put('viewss/webapi/myresource/updateCust/' ,customer);
@@ -156,5 +156,18 @@ export class ServiceService {
   }
   checkTimee(date : any):any{
     return this.httpClient.get('viewss/webapi/myresource/checkTime/' + this.serviceObj.serviceId+'/'+date);
+  }
+  getAllServices() : any {
+    return this.httpClient.get('viewss/webapi/myresource/getAllServices');
+  }
+  checkCode(code) : any{
+    return this.httpClient.get('viewss/webapi/myresource/checkSecretCode/' + code);
+  }
+  getWorkerBooks(workerId) : any{
+    return this.httpClient.get('viewss/webapi/myresource/getWorkerBookings/' + workerId);
+  }
+  sendOtp(otp:any,mobile:any):any{
+    return this.httpClient.get('viewss/webapi/myresource/otp/' + otp+'/'+mobile);
+
   }
 }

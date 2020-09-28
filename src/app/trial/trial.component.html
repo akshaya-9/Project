@@ -1,248 +1,262 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
-        <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
-        <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-        <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
-        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
-        <link href="trial.component.css">
-        <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
-       
-    </head>
-    <body id="page-top" style="color: #0c62b8;">
-       
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+<script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+<link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+<link href="trial.component.css">
+<link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
 
-     
-
-       <ngb-carousel (slide)="slideActivate($event)" style="max-width: 1700px; margin: 0; height: 450px; display:flex;" >
-            
-        <ng-template ngbSlide>
-                <div class="picsum-img-wrapper">
-                 <img src="assets/images/Car Wash_edited.jpg" alt="Angular Carousel 1">
-                </div>
-               
-              </ng-template>
-              <ng-template ngbSlide>
-                <div class="picsum-img-wrapper">
-                 <img src="assets/images/101.jpg" alt="Angular Carousel 2">
-                </div>
-                
-              </ng-template>
-              <ng-template ngbSlide>
-                <div class="picsum-img-wrapper">
-                 <img src="assets/images/plumbing image_edited.jpg" alt="Angular Carousel 3">
-                </div>
-               
-              </ng-template>
-              <ng-template ngbSlide>
-                <div class="picsum-img-wrapper">
-                 <img src="assets/images/cc1.jpeg" alt="Angular Carousel 4">
-                 </div>
-              
-              </ng-template>
-              <ng-template ngbSlide>
-                <div class="picsum-img-wrapper">
-                  <img src="assets/images/plum.jpeg" style=" margin: 0;
-                  position: absolute;
-                  top: 14%;
-                  left: 50%;
-                  margin-right: -50%;
-                  transform: translate(-50%, -19%);" alt="Angular Carousel 3">
-                </div>
-            </ng-template>
-            <ng-template ngbSlide>
-                <div class="picsum-img-wrapper">
-                  <img src="assets/images/salon02.jpeg" style="transform: translate(20%, -16%);" alt="Angular Carousel 2">
-                </div>
-                
-              </ng-template>
-          </ngb-carousel>
-         
-        <section class="page-section bg-light" id="portfolio">
-            <div class="container" style="    padding-top: 3px; margin-top: -24px;     margin-bottom: -46px;">
-                <div class="text-center">
-                    <h2 class="section-heading text-uppercase">WELCOME</h2>
-                    <h3 class="section-subheading text-muted ">Our Services at your door step.</h3>
-                </div>
-                <div class="row">
-                    <div class="col-lg-4 col-sm-6 mb-4 mb-sm-0">
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" data-toggle="modal" href="#portfolioModal5">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                </div>
-                                <img class="img-fluid cen image" src="assets/images/cp1.jpeg" alt="" />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading"></div>
-                                <div class="portfolio-caption-subheading text-muted font-weight-bold" (click) = "choose('carpentry')">Carpentry</div>
-                            </div>
-                        </div>
-                    </div>
+</head>
+<body id="page-top" style="color: #0c62b8;">
 
 
 
-                    <div class="col-lg-4 col-sm-6 mb-4">
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" data-toggle="modal" href="#portfolioModal2">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                </div>
-                                <img class="img-fluid cen image" src="assets/images/carw.jpeg" alt="" />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading"></div>
-                                <div class="portfolio-caption-subheading text-muted font-weight-bold" (click) = "choose('car wash')">Car Wash</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6 mb-4">
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" data-toggle="modal" href="#portfolioModal3">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                </div>
-                                <img class="img-fluid cen image" src="assets/images/elec.jpeg" alt="" />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading"></div>
-                                <div class="portfolio-caption-subheading text-muted font-weight-bold" (click) = "choose('electrical')">Electricians</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6 mb-4 mb-lg-0">
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" data-toggle="modal" href="#portfolioModal4">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                </div>
-                                <img class="img-fluid cen image" src="assets/images/plumb.jpg" alt="" />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading"></div>
-                                <div class="portfolio-caption-subheading text-muted font-weight-bold" (click) = "choose('plumber')">Plumbers</div>
-                            </div>
-                        </div>
-                    </div>
-                     <div class="col-lg-4 col-sm-6 mb-4">
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" data-toggle="modal" href="#portfolioModal1">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                </div>
-                                <img class="img-fluid cen image" src="assets/images/s1.jpeg" alt="" />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading"></div>
-                                <div class="portfolio-caption-subheading text-muted font-weight-bold " (click) = "choose('salon')"> Salon And Spa</div>
-                            </div>
-                        </div>
-                    </div>
+
+<ngb-carousel (slide)="slideActivate($event)" style="max-width: 1700px; margin: 0; height: 450px; display:flex;" >
+
+<ng-template ngbSlide>
+<div class="picsum-img-wrapper">
+<img src="assets/images/Car Wash_edited.jpg" alt="Angular Carousel 1">
+</div>
+
+</ng-template>
+<ng-template ngbSlide>
+<div class="picsum-img-wrapper">
+<img src="assets/images/101.jpg" alt="Angular Carousel 2">
+</div>
+
+</ng-template>
+<ng-template ngbSlide>
+<div class="picsum-img-wrapper">
+<img src="assets/images/plumbing image_edited.jpg" alt="Angular Carousel 3">
+</div>
+
+</ng-template>
+<ng-template ngbSlide>
+<div class="picsum-img-wrapper">
+<img src="assets/images/cc1.jpeg" alt="Angular Carousel 4">
+</div>
+
+</ng-template>
+<ng-template ngbSlide>
+<div class="picsum-img-wrapper">
+<img src="assets/images/plum.jpeg" style=" margin: 0;
+position: absolute;
+top: 14%;
+left: 50%;
+margin-right: -50%;
+transform: translate(-50%, -19%);" alt="Angular Carousel 3">
+</div>
+</ng-template>
+<ng-template ngbSlide>
+<div class="picsum-img-wrapper">
+<img src="assets/images/salon02.jpeg" style="transform: translate(20%, -16%);" alt="Angular Carousel 2">
+</div>
+
+</ng-template>
+</ngb-carousel>
+
+<section class="page-section bg-light" id="portfolio">
+<div class="container" style=" padding-top: 3px; margin-top: -24px; margin-bottom: -46px;">
+<div class="text-center">
+<h2 class="section-heading text-uppercase">WELCOME</h2>
+<h3 class="section-subheading text-muted ">Our Services at your door step.</h3>
+</div>
+<form >
+<div class="form-group">
+<div class="input-group">
+<div class="input-group-addon"><i class="glyphicon glyphicon-search"></i></div>
+<input type="text" (click) = "onclick()" style="width: 365px;margin-left: 30px;border-radius: 23px;" class="form-control" name="searchString" placeholder="Search for services..." [(ngModel)]="searchString" >
+</div>
+</div>
+</form>
+<div *ngIf="b; then Block"></div>
+<ng-template #Block>
+<div (click)="search(service)" style="margin-left: 35px;" routerLink ="one-service" *ngFor="let service of services | filter : 'serviceName' : searchString; let i = index">
+{{service.serviceName}}
+</div>
+</ng-template>
+<div class="row">
+<div class="col-lg-4 col-sm-6 mb-4 mb-sm-0">
+<div class="portfolio-item">
+<a class="portfolio-link" data-toggle="modal" href="#portfolioModal5">
+<div class="portfolio-hover">
+<div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+</div>
+<img class="img-fluid cen image" src="assets/images/cp1.jpeg" alt="" />
+</a>
+<div class="portfolio-caption">
+<div class="portfolio-caption-heading"></div>
+<div class="portfolio-caption-subheading text-muted font-weight-bold" (click) = "choose('carpentry')">Carpentry</div>
+</div>
+</div>
+</div>
 
 
 
-                    <div class="col-lg-4 col-sm-6">
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" data-toggle="modal" href="#portfolioModal6">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                </div>
-                                <img class="img-fluid cen image" src="assets/images/disinfect.jpg" alt="" />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading"></div>
-                                <div class="portfolio-caption-subheading text-muted font-weight-bold" (click) = "choose('disinfection')">Disinfection</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section class="page-section" id="about">
-            <div class="container" style="    padding-top: 3px; margin-top: -2pc; margin-bottom: -2pc;">
-                <div class="text-center">
-                    <h2 class="section-heading text-uppercase">About</h2>
-                    <h3 class="section-subheading text-muted">Our journey during the pandemic</h3>
-                </div>
-                <ul class="timeline">
-                    <li>
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/images/0.jpg.jpg" alt="" /></div>
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                                
-                                <h4 class="subheading">Beginnings</h4>
-                            </div>
-                            <div class="timeline-body"><p class="text-muted">
-                                2020 has begun with unexpected turn of events; COVID-19. 
-                                The Corona virus has taken lives of billions.
-                                Implementation of the lockdown did taken our loved restaurants and places away but
-                                has given us a chance to explore ourselves more and spend more time
-                                with our loved ones where we are safe and secured.
-                                </p></div>
-                        </div>
-                    </li>
-                    <li class="timeline-inverted">
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/images/disinfecting.jpg" alt="" /></div>
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                              
-                                <h4 class="subheading">New Normal</h4>
-                            </div>
-                            <div class="timeline-body"><p class="text-muted">No matter what the situation outside there are always troubles at you home with say pipes, applainces, furniture
-                                etc.</p></div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/images/disinfecting image.jpg" alt="" /></div>
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                                
-                                <h4 class="subheading">Transition to Full Service</h4>
-                            </div>
-                            <div class="timeline-body"><p class="text-muted">
-                                We at VIEWS would love to be at your service in this time of pandemic.
-                                We made sure every single equipment of ours
-                                is properly sanitized and the workers are taking at most precautions to provide a safe and quality service.
-                                They also get their temperatures checked everday and are also equiped with nessacary materials. 
-                                You have nothing to worry about.
-                                </p></div>
-                        </div>
-                    </li>
-                    <li class="timeline-inverted">
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/images/2.jpg.jpg" alt="" /></div>
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                               
-                                <h4 class="subheading">Phase Two Expansion</h4>
-                            </div>
-                            <div class="timeline-body"><p class="text-muted">
-                             Stay home stay safe
-                                </p></div>
-                        </div>
-                    </li>
-                    <li class="timeline-inverted">
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/images/c1.jpeg" alt="" />
-                            
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </section>
-     
-      
-  
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-        <script src="assets/mail/jqBootstrapValidation.js"></script>
-        <script src="assets/mail/contact_me.js"></script>
-        <script src="js/scripts.js"></script>
-    </body>
+<div class="col-lg-4 col-sm-6 mb-4">
+<div class="portfolio-item">
+<a class="portfolio-link" data-toggle="modal" href="#portfolioModal2">
+<div class="portfolio-hover">
+<div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+</div>
+<img class="img-fluid cen image" src="assets/images/carw.jpeg" alt="" />
+</a>
+<div class="portfolio-caption">
+<div class="portfolio-caption-heading"></div>
+<div class="portfolio-caption-subheading text-muted font-weight-bold" (click) = "choose('car wash')">Car Wash</div>
+</div>
+</div>
+</div>
+<div class="col-lg-4 col-sm-6 mb-4">
+<div class="portfolio-item">
+<a class="portfolio-link" data-toggle="modal" href="#portfolioModal3">
+<div class="portfolio-hover">
+<div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+</div>
+<img class="img-fluid cen image" src="assets/images/elec.jpeg" alt="" />
+</a>
+<div class="portfolio-caption">
+<div class="portfolio-caption-heading"></div>
+<div class="portfolio-caption-subheading text-muted font-weight-bold" (click) = "choose('electrical')">Electricians</div>
+</div>
+</div>
+</div>
+<div class="col-lg-4 col-sm-6 mb-4 mb-lg-0">
+<div class="portfolio-item">
+<a class="portfolio-link" data-toggle="modal" href="#portfolioModal4">
+<div class="portfolio-hover">
+<div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+</div>
+<img class="img-fluid cen image" src="assets/images/plumb.jpg" alt="" />
+</a>
+<div class="portfolio-caption">
+<div class="portfolio-caption-heading"></div>
+<div class="portfolio-caption-subheading text-muted font-weight-bold" (click) = "choose('plumber')">Plumbers</div>
+</div>
+</div>
+</div>
+<div class="col-lg-4 col-sm-6 mb-4">
+<div class="portfolio-item">
+<a class="portfolio-link" data-toggle="modal" href="#portfolioModal1">
+<div class="portfolio-hover">
+<div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+</div>
+<img class="img-fluid cen image" src="assets/images/s1.jpeg" alt="" />
+</a>
+<div class="portfolio-caption">
+<div class="portfolio-caption-heading"></div>
+<div class="portfolio-caption-subheading text-muted font-weight-bold " (click) = "choose('salon')"> Salon And Spa</div>
+</div>
+</div>
+</div>
+
+
+
+<div class="col-lg-4 col-sm-6">
+<div class="portfolio-item">
+<a class="portfolio-link" data-toggle="modal" href="#portfolioModal6">
+<div class="portfolio-hover">
+<div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+</div>
+<img class="img-fluid cen image" src="assets/images/disinfect.jpg" alt="" />
+</a>
+<div class="portfolio-caption">
+<div class="portfolio-caption-heading"></div>
+<div class="portfolio-caption-subheading text-muted font-weight-bold" (click) = "choose('disinfection')">Disinfection</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="page-section" id="about">
+<div class="container" style=" padding-top: 3px; margin-top: -2pc; margin-bottom: -2pc;">
+<div class="text-center">
+<h2 class="section-heading text-uppercase">About</h2>
+<h3 class="section-subheading text-muted">Our journey during the pandemic</h3>
+</div>
+<ul class="timeline">
+<li>
+<div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/images/0.jpg.jpg" alt="" /></div>
+<div class="timeline-panel">
+<div class="timeline-heading">
+
+<h4 class="subheading">Beginnings</h4>
+</div>
+<div class="timeline-body"><p class="text-muted">
+2020 has begun with unexpected turn of events; COVID-19.
+The Corona virus has taken lives of billions.
+Implementation of the lockdown did taken our loved restaurants and places away but
+has given us a chance to explore ourselves more and spend more time
+with our loved ones where we are safe and secured.
+</p></div>
+</div>
+</li>
+<li class="timeline-inverted">
+<div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/images/disinfecting.jpg" alt="" /></div>
+<div class="timeline-panel">
+<div class="timeline-heading">
+
+<h4 class="subheading">New Normal</h4>
+</div>
+<div class="timeline-body"><p class="text-muted">No matter what the situation outside there are always troubles at you home with say pipes, applainces, furniture
+etc.</p></div>
+</div>
+</li>
+<li>
+<div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/images/disinfecting image.jpg" alt="" /></div>
+<div class="timeline-panel">
+<div class="timeline-heading">
+
+<h4 class="subheading">Transition to Full Service</h4>
+</div>
+<div class="timeline-body"><p class="text-muted">
+We at VIEWS would love to be at your service in this time of pandemic.
+We made sure every single equipment of ours
+is properly sanitized and the workers are taking at most precautions to provide a safe and quality service.
+They also get their temperatures checked everday and are also equiped with nessacary materials.
+You have nothing to worry about.
+</p></div>
+</div>
+</li>
+<li class="timeline-inverted">
+<div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/images/2.jpg.jpg" alt="" /></div>
+<div class="timeline-panel">
+<div class="timeline-heading">
+
+<h4 class="subheading">Phase Two Expansion</h4>
+</div>
+<div class="timeline-body"><p class="text-muted">
+Stay home stay safe
+</p></div>
+</div>
+</li>
+<li class="timeline-inverted">
+<div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/images/c1.jpeg" alt="" />
+
+</div>
+</li>
+</ul>
+</div>
+</section>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+<script src="assets/mail/jqBootstrapValidation.js"></script>
+<script src="assets/mail/contact_me.js"></script>
+<script src="js/scripts.js"></script>
+</body>
 </html>

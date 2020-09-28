@@ -38,4 +38,13 @@ click(opt : any,order : any) : any{
   this.router.navigate(['services']);
 
 }
+ck(x:any):any{
+
+  if(x.imageName === null)
+    return true;
+    else{
+      console.log(x.imageName);
+      return false;
+}
+}
 }

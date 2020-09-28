@@ -47,8 +47,20 @@ export class OneServiceComponent implements OnInit {
       if(this.service1.cust != null){
       this.router.navigate(['book']);
       }
+      else if(this.service1.userType == "ser"){
+        this.notifyService.showInfo("", "Manager cannot book")
+      }
       else{
         this.notifyService.showInfo("", "Not logged in")
       }
+    }
+    ck():any{
+
+      if(this.ser.imageName === null)
+        return true;
+        else{
+          console.log(this.ser.imageName);
+          return false;
+    }
     }
 }

@@ -43,9 +43,14 @@ ratinn(r : any):any{
       else if(this.str >this.date){
         element.status = "not done"
       }
-      else if(this.str ===this.date && this.currentTime >= element.time.substring(0,2) && this.currentTime < element.time.substring(3,2)){
-        element.status = "on going"
+      else if(this.str ===this.date){
+         if(this.currentTime >= element.time.substring(0,2) && this.currentTime < element.time.substring(3,2)){
+          element.status = "on going"
       }
+      else{
+        element.status = "not done"
+      }
+    }
       else{
         element.status = "done"
       }
@@ -93,5 +98,20 @@ statusUp(book:any):any{
   book.time = "0";
   this.service.updateBook(book).subscribe((result : any) => {console.log(result)});
   
+}
+serviceFeed(s : any):any{
+  this.service.serviceObj = s.service;
+  this.service.serviceII = s.service.serviceId;
+  console.log(this.service.serviceObj);
+  this.router.navigate(['one-service']);
+}
+ck(booking:any):any{
+
+  if(booking.service.imageName === null)
+    return true;
+    else{
+      console.log(booking.service.imageName);
+      return false;
+}
 }
 }
