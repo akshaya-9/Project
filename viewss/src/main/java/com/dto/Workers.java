@@ -31,6 +31,7 @@ public class Workers {
 	private String mobile;
 	private int rating;
 	private int people;
+	private String gender;
 	@ManyToOne
 	@JoinColumn(name="serviceId")
 	private Service service;
@@ -39,6 +40,30 @@ public class Workers {
 	private List<Book> bookList =new ArrayList<Book>();
 	
 	
+	public Workers(int workerId, String workerName, String designation, String aarogyasetustatus, double temperature,
+			String mobile, int rating, int people, String gender, Service service, List<Book> bookList) {
+		super();
+		this.workerId = workerId;
+		this.workerName = workerName;
+		this.designation = designation;
+		this.aarogyasetustatus = aarogyasetustatus;
+		this.temperature = temperature;
+		this.mobile = mobile;
+		this.rating = rating;
+		this.people = people;
+		this.gender = gender;
+		this.service = service;
+		this.bookList = bookList;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
 	public Workers() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -58,21 +83,6 @@ public class Workers {
 
 	public void setPeople(int people) {
 		this.people = people;
-	}
-
-	public Workers(int workerId, String workerName, String designation, String aarogyasetustatus, double temperature,
-			String mobile, int rating, int people, Service service, List<Book> bookList) {
-		super();
-		this.workerId = workerId;
-		this.workerName = workerName;
-		this.designation = designation;
-		this.aarogyasetustatus = aarogyasetustatus;
-		this.temperature = temperature;
-		this.mobile = mobile;
-		this.rating = rating;
-		this.people = people;
-		this.service = service;
-		this.bookList = bookList;
 	}
 
 	public int getWorkerId() {

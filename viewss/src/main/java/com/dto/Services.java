@@ -30,19 +30,17 @@ public class Services {
 	@JoinColumn(name="serviceId")
 	private Service service;
 	
+	@ManyToOne
+	@JoinColumn(name="bookingId")
+	private Book book;
 	
-	
-	@JsonIgnore
-	@OneToMany(mappedBy = "services",fetch = FetchType.LAZY)
-	@Fetch(value = FetchMode.SUBSELECT)
-	private List<Book> book = new ArrayList<Book>();
 	
 	public Services() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Services(int id, String serviceeName, double price, Service service,List<Book> book) {
+	public Services(int id, String serviceeName, double price, Service service,Book book) {
 		super();
 		this.id = id;
 		this.serviceeName = serviceeName;
@@ -51,13 +49,11 @@ public class Services {
 		this.book = book;
 	}
 
-	
-
-	public List<Book> getBook() {
+	public Book getBook() {
 		return book;
 	}
 
-	public void setBook(List<Book> book) {
+	public void setBook(Book book) {
 		this.book = book;
 	}
 

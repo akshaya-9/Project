@@ -33,6 +33,11 @@ public class Customer {
 	private String mobile;
 	private String address;
 	private int pincode;
+	private String gender;
+	private String city;
+	private int ratings;
+	private int ppl;
+	private String status;
 	@JsonIgnore
 	@OneToMany(mappedBy="customer",fetch = FetchType.LAZY)
 	@Fetch(value = FetchMode.SUBSELECT)
@@ -46,8 +51,9 @@ public class Customer {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Customer(int custId, String custName, String email, String password, String mobile, String address,
-			int pincode,List<Book> bookList,List<Reviews> reviewsList) {
+	
+	public Customer(int custId, String custName, String email, String password, String mobile, String address,String status,
+			int pincode, String gender, String city, List<Book> bookList, List<Reviews> reviewsList,int ratings,int ppl) {
 		super();
 		this.custId = custId;
 		this.custName = custName;
@@ -56,9 +62,56 @@ public class Customer {
 		this.mobile = mobile;
 		this.address = address;
 		this.pincode = pincode;
+		this.gender = gender;
+		this.city = city;
 		this.bookList = bookList;
 		this.reviewsList = reviewsList;
+		this.ppl  = ppl;
+		this.ratings = ratings;
+		this.status = status;
+		
 	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public int getRatings() {
+		return ratings;
+	}
+
+	public void setRatings(int ratings) {
+		this.ratings = ratings;
+	}
+
+	public int getPpl() {
+		return ppl;
+	}
+
+	public void setPpl(int ppl) {
+		this.ppl = ppl;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
 	public int getCustId() {
 		return custId;
 	}

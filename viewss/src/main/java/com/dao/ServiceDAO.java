@@ -38,18 +38,22 @@ public class ServiceDAO {
 		return HibernateTemplate.updateObject(service);
 	}
 
-	public Service getServiceByMob(String mobile) {
-		return (Service)HibernateTemplate.getObjectByMob(mobile);
-	}
-	
 	public void updateSer(Service ss) {
 		// TODO Auto-generated method stub
 		HibernateTemplate.updateObject(ss);
 
 	}
+	public Service getServiceByMob(String mobile) {
+		return (Service)HibernateTemplate.getObjectByMob(mobile);
+	}
+
+	public List<Service> getServiceByCity(String category, String city) {
+		// TODO Auto-generated method stub
+		return (List)HibernateTemplate.getObjectListByCity(category,city);
+	}
 
 	public List<Service> getServices() {
-		// TODO Auto-generated method stub
-		return (List)HibernateTemplate.getAllObjectsList(Service.class);
-	}
+	    // TODO Auto-generated method stub
+	    return (List)HibernateTemplate.getAllObjectsList(Service.class);
+	    }
 }

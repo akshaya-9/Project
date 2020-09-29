@@ -35,7 +35,7 @@ public class Book {
 	private int rating;
 	private String status;
 	public Book(int bookingId, String appointmentType, Date date, String time, String mobile, double price,
-			String category, int rating, String status, Service service, Workers worker, Services services,
+			String category, int rating, String status, Service service, Workers worker, List<Services> services,
 			Customer customer) {
 		super();
 		this.bookingId = bookingId;
@@ -60,9 +60,10 @@ public class Book {
 	@JoinColumn(name="workerId")
 	private Workers worker;
 	
-	@ManyToOne
-	@JoinColumn(name="id")
-	private Services services;
+	@JsonIgnore
+	@OneToMany(mappedBy = "book",fetch = FetchType.LAZY)
+	@Fetch(value = FetchMode.SUBSELECT)
+	private List<Services> services = new ArrayList<Services>();
 	
 	
 	
@@ -108,15 +109,12 @@ public class Book {
 	}
 	
 	
-	
-	public Services getServices() {
+	public List<Services> getServices() {
 		return services;
 	}
-
-	public void setServices(Services services) {
+	public void setServices(List<Services> services) {
 		this.services = services;
 	}
-
 	public void setDate(java.util.Date date) {
 		this.date = date;
 	}

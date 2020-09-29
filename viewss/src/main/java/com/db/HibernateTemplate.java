@@ -1,7 +1,7 @@
 package com.db;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -54,29 +54,6 @@ public class HibernateTemplate {
 			e.printStackTrace();
 		}
 		return obj;
-	}
-	
-	public static Service getObjectByMob(String mobile) {
-		String queryString = "from Service where mobile = :mobile";
-		Session session = sessionFactory.openSession();
-		Query query = session.createQuery(queryString);
-		query.setString("mobile", mobile);
-		Object queryResult = query.uniqueResult();
-		Service service = (Service)queryResult;
-		session.close();
-		return service; 
-	}
-
-	public static Customer getObByMob(String mobile) {
-		// TODO Auto-generated method stub
-		String queryString = "from Customer where mobile = :mobile";
-		Session session = sessionFactory.openSession();
-		Query query = session.createQuery(queryString);
-		query.setString("mobile", mobile);
-		Object queryResult = query.uniqueResult();
-		Customer service = (Customer)queryResult;
-		session.close();
-		return service; 
 	}
 
 	public static Customer getObjectByUserPass(String email,String password) {
@@ -214,7 +191,8 @@ public class HibernateTemplate {
 		//else {
 			Criterion nameCriterion = Restrictions.eq("service.id", value);
 			criteria.add(nameCriterion);
-			return criteria.list();}
+			return criteria.list();
+		}
 
 	public static Service getServiceByUserPass(String email, String password) {
 		// TODO Auto-generated method stub
@@ -242,22 +220,23 @@ public class HibernateTemplate {
 		List<Book> logEntries = query.list();
 		return logEntries;
 }
-	public static List<Book> getObjectListBywId(int workerId) {
-		String queryString = "select * from Book where workerId = :workerId";
+
+	public static List<Workers> getObjectListofW(int serviceId) {
+		String queryString = "select * from Workers where serviceId = :serviceId and (rating/people>2.5 or people <5);";
 		//Session session=sessionFactory.openSession();
 		//Query query = session.createQuery(queryString);
 		//query.setInteger("serviceId", serviceId);
 		//query.setString("password", password);
 		//Object queryResult = query.uniqueResult();
 		//Service service = (Service)queryResult;
-		String hql = "from Book where workerId = :workerId";
+		String hql = "from Workers where serviceId = :serviceId and (rating/people>2.5 or people <5)";
 		Session session = sessionFactory.openSession();
 		Query query = session.createQuery(hql);
-		query.setInteger("workerId", workerId);
-		List<Book> logEntries = query.list();
+		query.setInteger("serviceId", serviceId);
+		List<Workers> logEntries = query.list();
 		return logEntries;
 }
-
+	
 	public static Customer getObjectByEmail(String email) {
 		String queryString = "from Customer where email = :email";
 		Query query = sessionFactory.openSession().createQuery(queryString);
@@ -279,6 +258,21 @@ public class HibernateTemplate {
 		return logEntries;
 	}
 
+	public static List getObjectListBywId(int workerId) {
+		String queryString = "select * from Book where workerId = :workerId";
+		//Session session=sessionFactory.openSession();
+		//Query query = session.createQuery(queryString);
+		//query.setInteger("serviceId", serviceId);
+		//query.setString("password", password);
+		//Object queryResult = query.uniqueResult();
+		//Service service = (Service)queryResult;
+		String hql = "from Book where workerId = :workerId";
+		Session session = sessionFactory.openSession();
+		Query query = session.createQuery(hql);
+		query.setInteger("workerId", workerId);
+		List<Book> logEntries = query.list();
+		return logEntries;
+	}
 	public static List getObjectListByDate(int serviceId, Date date) {
 		// TODO Auto-generated method stub
 		String hql = "from Book where serviceId = :serviceId and DATE_FORMAT(date,'%Y-%m-%d') = :date";
@@ -290,11 +284,54 @@ public class HibernateTemplate {
 		return logEntries;
 	}
 
-	public static List getAllObjectsList(Class<Service> class1) {
+	public static Service getObjectByMob(String mobile) {
+		String queryString = "from Service where mobile = :mobile";
+		Session session = sessionFactory.openSession();
+		Query query = session.createQuery(queryString);
+		query.setString("mobile", mobile);
+		Object queryResult = query.uniqueResult();
+		Service service = (Service)queryResult;
+		session.close();
+		return service; 
+	}
+
+	public static Customer getObByMob(String mobile) {
 		// TODO Auto-generated method stub
-		String hql = "from Service";
+		String queryString = "from Customer where mobile = :mobile";
+		Session session = sessionFactory.openSession();
+		Query query = session.createQuery(queryString);
+		query.setString("mobile", mobile);
+		Object queryResult = query.uniqueResult();
+		Customer service = (Customer)queryResult;
+		session.close();
+		return service; 
+	}
+
+	public static List<Service> getObjectListByCity(String category, String city) {
+		String hql = "from Service where category = :category and city = :city";
 		Session session = sessionFactory.openSession();
 		Query query = session.createQuery(hql);
+		query.setString("category", category);
+		query.setString("city", city);
+		List<Service> logEntries = query.list();
+		return logEntries;
+	}
+
+	public static List getAllObjectsList(Class<Service> class1) {
+	    // TODO Auto-generated method stub
+	    String hql = "from Service";
+	    Session session = sessionFactory.openSession();
+	    Query query = session.createQuery(hql);
+	    List<Book> logEntries = query.list();
+	    return logEntries;
+	    }
+
+	public static List getBookingsByWorker(int workerId) {
+		// TODO Auto-generated method stub
+		String hql = "from Book where workerId = :workerId";
+		Session session = sessionFactory.openSession();
+		Query query = session.createQuery(hql);
+		query.setInteger("workerId", workerId);
 		List<Book> logEntries = query.list();
 		return logEntries;
 	}

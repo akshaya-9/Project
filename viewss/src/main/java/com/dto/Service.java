@@ -32,11 +32,13 @@ public class Service {
 	private String password;
 	private String mobile;
 	private String address;
+	private String city;
 	private String category;
 	private String coupons;
 	private double rating;
 	private String reviews;
 	private String imageName;
+	private String secretCode;
 	@JsonIgnore
 	@OneToMany(mappedBy="service",fetch = FetchType.LAZY)
 	@Fetch(value = FetchMode.SUBSELECT)
@@ -62,7 +64,7 @@ public class Service {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Service(int serviceId, String serviceName, String email, String password, String mobile, String address,
+	public Service(int serviceId, String serviceName, String email, String password, String mobile, String address,String city,String secretCode,
 			String category, String coupons, double rating, String reviews,String imageName,List<Workers> workerList,List<Reviews> reviewList,List<Book> bookList,List<ServiceImage> serviceImage,List<Services> services) {
 		super();
 		this.serviceId = serviceId;
@@ -81,6 +83,14 @@ public class Service {
 		this.imageName = imageName;
 		this.serviceImage = serviceImage;
 		this.services = services;
+		this.city = city;
+		this.secretCode = secretCode;
+	}
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
 	}
 	public int getServiceId() {
 		return serviceId;
@@ -178,6 +188,39 @@ public class Service {
 	public void setServices(List<Services> services) {
 		this.services = services;
 	}
+	public String getSecretCode() {
+		return secretCode;
+	}
+	public void setSecretCode() {
+		String sc = getAlphaNumericString(10);
+		secretCode = sc;
+	}
 	
+	 public static String getAlphaNumericString(int n) 
+	    { 
+	  
+	        // chose a Character random from this String 
+	        String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	                                    + "0123456789"
+	                                    + "abcdefghijklmnopqrstuvxyz"+"!@#$%^&*()/*-+."; 
+	  
+	        // create StringBuffer size of AlphaNumericString 
+	        StringBuilder sb = new StringBuilder(n); 
+	  
+	        for (int i = 0; i < n; i++) { 
+	  
+	            // generate a random number between 
+	            // 0 to AlphaNumericString variable length 
+	            int index 
+	                = (int)(AlphaNumericString.length() 
+	                        * Math.random()); 
+	  
+	            // add Character one by one in end of sb 
+	            sb.append(AlphaNumericString 
+	                          .charAt(index)); 
+	        } 
+	  
+	        return sb.toString(); 
+	    }
 	
 }

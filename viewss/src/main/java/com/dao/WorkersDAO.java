@@ -15,7 +15,7 @@ public class WorkersDAO {
 	
 	public List<Workers> getWorkersByService(int serviceId) {	
 		Service service;
-		return (List)HibernateTemplate.getObjectListById(Workers.class,"service",serviceId);
+		return (List)HibernateTemplate.getObjectListofW(serviceId);
 	}
 
 	public void update(Workers worker) {
